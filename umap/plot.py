@@ -492,6 +492,7 @@ def points(
     width=800,
     height=800,
     show_legend=True,
+    show_bottom_text=True,
     subset_points=None,
     ax=None,
     alpha=None,
@@ -596,6 +597,10 @@ def points(
     show_legend: bool (optional, default True)
         Whether to display a legend of the labels
 
+    show_bottom_text: bool (optional, default True)
+        Whether to display the (generally white or black) text on the
+        bottom of the image.
+
     subset_points: array, shape (n_samples,) (optional, default None)
         A way to select a subset of points based on an array of boolean
         values.
@@ -698,7 +703,7 @@ def points(
         )
 
     ax.set(xticks=[], yticks=[])
-    if _get_metric(umap_object) != "euclidean":
+    if _get_metric(umap_object) != "euclidean" and show_bottom_text == True:
         ax.text(
             0.99,
             0.01,
@@ -709,7 +714,7 @@ def points(
             horizontalalignment="right",
             color=font_color,
         )
-    else:
+    elif show_bottom_text == True:
         ax.text(
             0.99,
             0.01,
